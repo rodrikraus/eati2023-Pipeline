@@ -9,7 +9,7 @@ jobs:
   #Realizo el linting mediante flake8 y pylint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3      
       - run: |
           pip install flake8
           pip install pylint
@@ -27,6 +27,7 @@ jobs:
           ref: branch-Pipeline
           path: .
       - run: python -m unittest --verbose --failfast
+      - run: tree
 
   build:
   #Ejecuta el script main.py y almacena el resultado en un artifact
