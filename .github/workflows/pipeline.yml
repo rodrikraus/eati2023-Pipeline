@@ -30,7 +30,6 @@ jobs:
           repository: rodrikraus/eati2023-Pipeline
           ref: branch-Pipeline
           path: .
-      - run: tree
       - run: python -m unittest --verbose --failfast
 
   build:
@@ -44,7 +43,6 @@ jobs:
           ref: branch-Pipeline
           path: .
       - run: python main.py
-      - run: tree
       - uses: actions/upload-artifact@v3
         with:
           name: miArtefacto
