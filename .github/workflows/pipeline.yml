@@ -22,6 +22,10 @@ jobs:
     needs: lint
     steps:
       - uses: actions/checkout@v3
+        with:
+          repository: rodrikraus/eati2023-Pipeline
+          ref: main
+          path: .
       - run: python -m unittest --verbose --failfast
 
   build:
@@ -44,30 +48,3 @@ jobs:
 
 
 
-
-
-
-
-
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: miArtefacto
-          path: descarga/main
-
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: miArtefacto
-          path: ./descarga
-      - run: |
-          ls
-          chmod +x ./descarga/main #Doy permisos de ejecución
-          if [ $? -eq 0 ]; then #Si el codigo de salida es 0
-            echo "Éxito"
-          else #Si el codigo de salida es 1
-            echo "Error" 
-          fi
