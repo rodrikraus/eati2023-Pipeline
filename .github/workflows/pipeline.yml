@@ -38,7 +38,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: miArtefacto
-          path: main/build
+          path: ./build
 
   deploy:
   #Descarga el resultado anterior, y lo instala en ambiente de producción. Almacena el log generado en un artifact.
