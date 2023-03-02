@@ -35,6 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: python main.py
+      - run: tree
       - uses: actions/upload-artifact@v3
         with:
           name: miArtefacto
