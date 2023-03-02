@@ -12,3 +12,6 @@ def main():
         os.mkdir('build')
         with open(r'build\index.html', 'x',  encoding="utf8"):
             print('Archivo abierto exitosamente.')
+
+
+main()
