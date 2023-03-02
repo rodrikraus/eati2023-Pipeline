@@ -26,8 +26,8 @@ jobs:
           repository: rodrikraus/eati2023-Pipeline
           ref: branch-Pipeline
           path: .
-      - run: python -m unittest --verbose --failfast
       - run: tree
+      - run: python -m unittest --verbose --failfast
 
   build:
   #Ejecuta el script main.py y almacena el resultado en un artifact
