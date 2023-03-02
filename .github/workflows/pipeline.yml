@@ -34,6 +34,10 @@ jobs:
     needs: unit-test
     steps:
       - uses: actions/checkout@v3
+        with:
+          repository: rodrikraus/eati2023-Pipeline
+          ref: main
+          path: .
       - run: python main.py
       - run: tree
       - uses: actions/upload-artifact@v3
