@@ -7,7 +7,7 @@ on:
 jobs:
   lint:
   #Realizo el linting mediante flake8 y pylint
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
         with:
