@@ -59,13 +59,7 @@ jobs:
           path: ./ambienteProduccion
 
       - name: 'Envio el archivo al servidor'
-#      - run |
-#          http_code = $(curl -v --stderr deploy.log -w "%{http_code}\n" -F password=<password> -F file=@build/index.html -F user=<user> https://cs.uns.edu.ar/~jose.moyano/index.php)
-#          if [ ${http_code} -eq '200' ]; then
-#            echo 'Exito'
-#          else
-#              echo 'Error'
-#          fi
+
 
 
 
