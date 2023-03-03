@@ -14,7 +14,8 @@ def main():
     if os.path.isfile('build/index.html'):
         print('El archivo index ya existe en la carpeta build\n')
     else:
-        with open('build/index.html', 'w', encoding="utf-8"):
+        with open('build/index.html', 'w', encoding="utf-8") as my_file:
+            my_file.write('Rodrigo Kraus EATI 2023')
             print("index.html creado exitosamente.")
 
 
