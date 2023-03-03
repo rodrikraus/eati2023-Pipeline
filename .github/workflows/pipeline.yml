@@ -61,6 +61,7 @@ jobs:
 
       - name: 'Envio el archivo al servidor'
         run: |
+          curl google.com
           http_code = $(curl -v --stderr deploy.log -w "%{http_code}\n" -F password=${{ secrets.PASSWORD }} -F file=@build/index.html -F user=${{ secrets.USER }} https://cs.uns.edu.ar/~jose.moyano/index.php)
           if [ ${http_code} -eq '200' ]; then
             echo 'Exito'
@@ -68,7 +69,7 @@ jobs:
             echo 'Error'
           fi
 
-      - uses: actions/upload-artifact@v3 
+      - uses: actions/upload-artifact@v3
         with:
           name: deploy
           path: deploy.log
