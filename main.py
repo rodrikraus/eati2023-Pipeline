@@ -1,8 +1,4 @@
-#!/usr/bin/python3
-
-"""
-Esto es parte de la actividad sobre pipeline del dia jueves
-"""
+"""GitHub Actions EATI 2023 - Creación de pipeline"""
 import os.path
 
 
@@ -10,20 +6,17 @@ def main():
     """
     Si no existe, crea la carpeta build y el archivo index.html
     """
-    folder = 'build/'
-    file = folder + 'index.html'
 
-    if os.path.exists(folder):
-        print('\nNo se pudo crear la carpeta nueva, ya existia')
+    if os.path.exists('build/'):
+        print('\nLa carpeta build ya existe.')
     else:
-        os.mkdir(folder)
-        print('\nCarpeta creada exitosamente.')
+        os.mkdir('build/')
+        print('\nSe creó la carpeta build.')
 
-    if os.path.isfile(file):
-        print('No se pudo crear el archivo nuevo, ya existia\n')
+    if os.path.isfile('build/index.html'):
+        print('El archivo index ya existe en la carpeta build\n')
     else:
-        with open(file, 'w', encoding="utf-8") as my_file:
-            my_file.write('Este archivo fue creado con Python.\n')
+        with open('build/index.html', 'w', encoding="utf-8"):
             print("Archivo creado exitosamente")
 
 
