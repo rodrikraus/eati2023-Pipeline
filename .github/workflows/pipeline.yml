@@ -1,0 +1,77 @@
+name: pipeline
+on:
+  push:
+    branches:
+      - branch-Pipeline
+
+jobs:
+  lint:
+  #Realizo el linting mediante flake8 y pylint
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: rodrikraus/eati2023-Pipeline
+          ref: branch-Pipeline
+          path: .
+      - run: |
+          pip install flake8
+          pip install pylint
+          flake8 main.py
+          pylint main.py
+
+  unit-test:
+  #Corre el test unitario test.py
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: rodrikraus/eati2023-Pipeline
+          ref: branch-Pipeline
+          path: .
+      - run: tree
+      - run: python -m unittest --verbose --failfast
+
+  build:
+  #Ejecuta el script main.py y almacena el resultado en un artifact
+    runs-on: ubuntu-latest
+    needs: unit-test
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: rodrikraus/eati2023-Pipeline
+          ref: branch-Pipeline
+          path: .
+      - run: python main.py
+      - uses: actions/upload-artifact@v3
+        with:
+          name: index.html
+          path: build/
+
+  deploy:
+  #Descarga el resultado anterior, y lo instala en ambiente de producción. Almacena el log generado en un artifact.
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: index.html
+          path: ./build
+
+      - name: 'Envio el archivo al servidor'
+        run: |
+          http_code=$(curl -v --stderr deploy.log -w "%{http_code}\n" -F password=${{ secrets.PASSWORD }} -F file=@build/index.html -F user=${{ secrets.USER }} https://cs.uns.edu.ar/~jose.moyano/index.php)
+          if [ ${http_code} -eq '200' ]; then
+            echo 'Exito'
+          else
+            echo 'Error'
+          fi
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: deploy
+          path: deploy.log
+
+
+
